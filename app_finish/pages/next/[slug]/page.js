@@ -1,4 +1,5 @@
-import DetailedMovie from "../../../components/DetailedMovie";
+import Image from 'next/image';
+import styles from './page.module.css';
 
 export default async function MovieDetailsPage({ params }) {
   const movieId = params.slug;
@@ -22,6 +23,34 @@ export default async function MovieDetailsPage({ params }) {
   };
 
   return (
-    <DetailedMovie banner={movieDetails.poster_path} title={movieDetails.title} date={formatDate(movieDetails.release_date)} overview={movieDetails.overview} vote_average={movieDetails.vote_average} />
+    <div className="container">
+      {movieDetails.poster_path || movieDetails.title || movieDetails.date || movieDetails.overview || movieDetails.vote_average ? (
+        <div className={styles.wrapper}>
+          {movieDetails.poster_path && (
+            <Image className={styles.image}
+              src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+              alt={movieDetails.title}
+              width={200}
+              height={300}
+            />
+          )}
+
+          <div className={styles.details}>
+            <h1 className={styles.title}>{movieDetails.title}</h1>
+            <div>
+              <div className={styles.releaseDate}>
+                Data de Lançamento: {formatDate(movieDetails.date)}
+              </div>
+              <div className={styles.voteAverage}>
+                Avaliação: {movieDetails.vote_average}
+              </div>
+              <p className={styles.overview}>Descrição: <br /> {movieDetails.overview}</p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <p>Detalhes do filme não encontrados.</p>
+      )}
+    </div>
   );
 }

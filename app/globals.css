@@ -75,3 +75,20 @@ a {
     max-width: 1320px;
   }
 }
+
+.next_page {
+  min-height: 24rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.next_page h1 {
+  font-size: 4rem;
+  padding-bottom: 0.5rem;
+}
+
+.next_page h1 span {
+  color: rgb(75, 111, 237);
+}

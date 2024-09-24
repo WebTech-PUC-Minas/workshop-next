@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation'; // Importar useRouter
 import style from "./Card.module.css";
 import Image from 'next/image';
-import heartSolid from '../../../public/icons/heart-solid.svg';
-import heartRegular from '../../../public/icons/heart-regular.svg';
+import heartSolid from '../../public/icons/heart-solid.svg';
+import heartRegular from '../../public/icons/heart-regular.svg';
 
 function Card({ banner, title, date, id }) {
   const [show, setShow] = useState(false);
