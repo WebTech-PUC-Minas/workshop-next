@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Importar useRouter
+import { useRouter } from 'next/navigation';
 import style from "./Card.module.css";
 import Image from 'next/image';
 import heartSolid from '../../public/icons/heart-solid.svg';
@@ -22,7 +22,7 @@ function Card({ banner, title, date, id }) {
   };
 
   return (
-    <div className={style.card} onClick={handleCardClick}> {/* Adiciona o evento de clique aqui */}
+    <div className={style.card} onClick={handleCardClick}>
       <figure>
         <Image src={banner} alt={title} width={640} height={360} layout="responsive" />
       </figure>
