@@ -24,6 +24,20 @@ O Next.js oferece diversas ferramentas integradas para otimizar o desempenho da 
 
 O componente `next/image` otimiza o carregamento de imagens no Next.js. Ele oferece funcionalidades como carregamento sob demanda, suporte a diferentes formatos (como WebP) e redimensionamento automático de imagens para diferentes tamanhos de tela, garantindo uma melhor performance.
 
+Importante: Ao utilizar imagens de fontes externas, é necessário configurar o next.config.mjs. Abaixo, você deve preencher com a configuração necessária:
+```next.config.mjs
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    images: {
+      domains: [
+        "image.tmdb.org",
+      ],
+    },
+  };
+  
+  export default nextConfig;
+```
+
 ```jsx
 // components/Card.js
 import style from "./Card.module.css";
