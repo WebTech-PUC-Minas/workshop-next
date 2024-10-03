@@ -2,7 +2,6 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import { Roboto, Poppins } from 'next/font/google';
 
-// Carregue a fonte Roboto e Source Code Pro
 const roboto = Roboto({
   weight: ['400', '700'],
   subsets: ['latin'],

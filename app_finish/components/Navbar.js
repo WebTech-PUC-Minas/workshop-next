@@ -11,7 +11,7 @@ function Navbar() {
             <Link href="/">React.js</Link>
           </li>
           <li>
-            <Link href="/pages/next">Next.js</Link>
+            <Link href="/next">Next.js</Link>
           </li>
         </ul>
       </nav>

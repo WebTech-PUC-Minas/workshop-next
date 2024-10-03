@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import style from "./Card.module.css";
 import Image from 'next/image';
-import heartSolid from '../../public/icons/heart-solid.svg';
-import heartRegular from '../../public/icons/heart-regular.svg';
 
 function Card({ banner, title, date, id }) {
   const [show, setShow] = useState(false);
@@ -31,9 +30,9 @@ function Card({ banner, title, date, id }) {
         <div>
           <time>{date}</time>
           {show ? (
-            <Image className={style.icon} src={heartSolid} alt="favorited" onClick={handleClick} />
+            <AiFillHeart className={style.icon} onClick={handleClick} />
           ) : (
-            <Image className={style.icon} src={heartRegular} alt="not favorited" onClick={handleClick} />
+            <AiOutlineHeart className={style.icon} onClick={handleClick} />
           )}
         </div>
       </article>
