@@ -187,13 +187,59 @@ CSR é uma técnica onde o conteúdo da página é gerado no navegador do client
 NEXT_PUBLIC_TMDB_API_KEY = ""
 ```
 2. Entre as àspas coloque a sua chave da [API](https://www.themoviedb.org/settings/api)
-3. Em pages/next/page.js insira:
+3. Modifique o card para ele ser client side:
+```jsx
+"use client";
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import style from "./Card.module.css";
+import Image from 'next/image';
+
+function Card({ banner, title, date, id }) {
+  const [show, setShow] = useState(false);
+  const router = useRouter();
+
+  const handleClick = () => {
+    setShow(!show);
+  };
+
+  const handleCardClick = () => {
+    if (id) {
+      router.push(`./next/${id}`);
+    }
+  };
+
+  return (
+    <div className={style.card} onClick={handleCardClick}>
+      <figure>
+        <Image src={banner} alt={title} width={640} height={360} layout="responsive" />
+      </figure>
+      <article>
+        <h1>{title}</h1>
+        <div>
+          <time>{date}</time>
+          {show ? (
+            <AiFillHeart className={style.icon} onClick={handleClick} />
+          ) : (
+            <AiOutlineHeart className={style.icon} onClick={handleClick} />
+          )}
+        </div>
+      </article>
+    </div>
+  );
+}
+
+export default Card;
+```
+4. Em pages/next/page.js insira:
 ```jsx
 //pages/next/page.js
 "use client";
 
 import { useEffect, useState } from "react";
-import Card from "../../components/Card";
+import Card from "../components/Card";
 
 export default function NextPage() {
   const [movies, setMovies] = useState([]);
@@ -246,54 +292,9 @@ export default function NextPage() {
   );
 }
 ```
-```jsx
-"use client";
-
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import style from "./Card.module.css";
-import Image from 'next/image';
-
-function Card({ banner, title, date, id }) {
-  const [show, setShow] = useState(false);
-  const router = useRouter();
-
-  const handleClick = () => {
-    setShow(!show);
-  };
-
-  const handleCardClick = () => {
-    if (id) {
-      router.push(`./next/${id}`);
-    }
-  };
-
-  return (
-    <div className={style.card} onClick={handleCardClick}>
-      <figure>
-        <Image src={banner} alt={title} width={640} height={360} layout="responsive" />
-      </figure>
-      <article>
-        <h1>{title}</h1>
-        <div>
-          <time>{date}</time>
-          {show ? (
-            <AiFillHeart className={style.icon} onClick={handleClick} />
-          ) : (
-            <AiOutlineHeart className={style.icon} onClick={handleClick} />
-          )}
-        </div>
-      </article>
-    </div>
-  );
-}
-
-export default Card;
-```
 
 > Importante: Ao utilizar imagens de fontes externas, é necessário configurar o next.config.mjs. Abaixo, você deve preencher com a configuração necessária:
-
+5. Configure o domínio de imagem para a API:
 ```next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -321,7 +322,7 @@ TMDB_API_KEY = ""
 ```jsx
 //pages/next/[slug]/page.js
 import Image from 'next/image';
-import styles from './page.module.css';
+import styles from '../../page.module.css';
 
 export default async function MovieDetailsPage({ params }) {
   const movieId = params.slug;
