@@ -174,7 +174,7 @@ export default function MovieDetailsPage({params}) {
     );
 }
 ```
-4. teste a rota com o link: https://pages/next/123 
+4. teste a rota com o link: https://http://localhost:3000/next/123 
 
 ## O que é Client Side Rendering (CSR) e Server Side Rendering (SSR)
 
